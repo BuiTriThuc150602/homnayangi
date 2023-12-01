@@ -1,0 +1,277 @@
+<html lang="vi">
+  <head>
+    <title>Hôm Nay Em Muốn Ăn Gì ?</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- <link rel="stylesheet" href="main.css" type="text/css" /> -->
+    <link type="icon/x-icon" href="favicon.ico" rel="shortcut icon" />
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+
+    <script type="text/javascript" src="js/Winwheel.min.js"></script>
+    <script src="js/TweenMax.min.js"></script>
+    <script src="js/main.js" defer></script>
+  </head>
+  <body
+    class="d-flex justify-content-center align-items-center"
+    style="
+      background-image: url(img/bg.png);
+      background-size: cover;
+      height: 100vh;
+      width: 100vw;
+      background-repeat: no-repeat;
+      font-family: 'Times New Roman';
+    "
+  >
+    <div
+      class="container border rounded-3 shadow overflow-hidden d-inline justify-content-center align-items-center"
+    >
+      <div
+        class="d-flex justify-content-between align-items-center bg-info m-2 border rounded-3"
+      >
+        <img
+          src="img/icoDoraTitle.png"
+          alt="dora icon"
+          width="80"
+          height="80"
+        />
+        <h1 class="text-white text-center">Hôm Nay Em Muốn Ăn Gì ?</h1>
+        <img
+          src="img/icoDoraTitle.png"
+          alt="dora icon"
+          width="80"
+          height="80"
+        />
+      </div>
+      <div
+        class="row border d-inline-flex justify-content-center w-100 align-items-center"
+      >
+        <div
+          class="col-md-3 d-flex justify-content-between align-items-center border rounded-3 shadow"
+        >
+          <button
+            id="spin_start"
+            class="btn btn-outline-success rounded-3 px-2 fw-bold"
+            onClick="startSpin();"
+            disabled
+          >
+            <img src="img/btnDora.png" alt="dora icon" width="40" />
+            Quay Đê
+          </button>
+          <img src="img/dora1.png" alt="dora icon" width="100" />
+          <button
+            id="spin_reset"
+            class="btn btn-outline-warning rounded-3 px-2 fw-bold hide"
+            onClick="resetWheel();"
+          >
+            Quay lại
+            <img src="img/reBtnDora.png" alt="dora icon" width="50" />
+          </button>
+        </div>
+        <div
+          class="col-md-9 d-flex justify-content-center align-items-center border rounded-3 shadow the_wheel"
+          style="
+            background-image: url(img/wheel_back.png);
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 550px;
+          "
+        >
+          <canvas id="canvas" width="440" height="440"></canvas>
+        </div>
+      </div>
+      <div
+        class="d-flex justify-content-between align-items-center bg-info m-2 border rounded-3"
+      >
+        <img
+          src="img/icoDoraTitle.png"
+          alt="dora icon"
+          width="80"
+          height="80"
+        />
+        <div>
+          <button
+            id="insertBtn"
+            class="btn btn-outline-success rounded-3 px-2 fw-bold"
+            onclick="openInsertModel()"
+          >
+            <img src="img/btnDora.png" alt="dora icon" width="40" />
+            Nay không vui, Muốn mấy món khác
+          </button>
+        </div>
+        <img
+          src="img/icoDoraTitle.png"
+          alt="dora icon"
+          width="80"
+          height="80"
+        />
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="resultModal"
+      tabindex="-1"
+      aria-labelledby="resultModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header bg-info">
+            <img
+              src="img/icoDoraTitle.png"
+              alt="dora icon"
+              width="50"
+              height="50"
+              class="me-3"
+            />
+            <h1
+              class="modal-title text-center text-white"
+              id="resultModalLabel"
+            >
+              Ăn gì nè ?
+            </h1>
+            <button
+              type="button"
+              class="btn-close bg-white"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <h2 class="text-center">
+              Ròi chốt, đi ăn
+              <span id="resultText" class="text-success"></span> nha bạn
+            </h2>
+            <img
+              src="img/dora1.png"
+              alt="dora icon"
+              width="100"
+              class="mx-auto d-block"
+            />
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-outline-warning rounded-3 px-2 fw-bold"
+              data-bs-dismiss="modal"
+              onClick="resetWheel();"
+            >
+              Quay lại
+              <img src="img/reBtnDora.png" alt="dora icon" width="50" />
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal insert values-->
+    <div
+      class="modal fade"
+      id="insertModal"
+      tabindex="-1"
+      aria-labelledby="insertModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header bg-info">
+            <img
+              src="img/icoDoraTitle.png"
+              alt="dora icon"
+              width="50"
+              height="50"
+              class="me-3"
+            />
+            <h1
+              class="modal-title text-center text-white"
+              id="insertModalLabel"
+            >
+              Nhập mấy món đang phân vân dô đây
+            </h1>
+            <button
+              type="button"
+              class="btn-close bg-white"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <img
+              src="img/dora1.png"
+              alt="dora icon"
+              width="100"
+              class="mx-auto d-block"
+            />
+            <h5 class="text-center">
+              Mỗi món cách nhau bằng dấu phẩy nhé
+              <img
+                src="img/finger.png"
+                alt="dora icon"
+                width="50"
+                class="mx-auto d-block"
+              />
+            </h5>
+            <!-- show error -->
+            <div class="alert alert-danger" id="errorAlert" role="alert">
+              <h3 class="alert-heading">Lỗi rồi</h3>
+              <div class="d-inline-flex justify-content-center align-items-center">
+                <h5 class="mb-0" id="errorTitle"></h5>
+                <img
+                  src="img/tatMeme.png"
+                  alt="tat meme"
+                  width="100"
+                  class="mx-auto d-block ms-3"
+                />
+              </div>
+            </div>
+
+            <textarea
+              class="form-control"
+              id="inputValues"
+              placeholder="Món 1, Món 2, Món 3, ..."
+            ></textarea>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-outline-warning rounded-3 pe-3 fw-bold"
+              data-bs-dismiss="modal"
+              onClick="resetWheel();"
+            >
+              <img src="img/reBtnDora.png" alt="dora icon" width="50" />
+              Quay lại
+            </button>
+            <button
+              type="button"
+              class="btn btn-outline-success rounded-3 pe-3 fw-bold"
+              onClick="insertPrizes();"
+            >
+              <img src="img/btnDora.png" alt="dora icon" width="40" />
+              ok nhá
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
