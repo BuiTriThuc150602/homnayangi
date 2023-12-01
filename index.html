@@ -62,7 +62,7 @@
         />
       </div>
       <div
-        class="row border d-inline-flex justify-content-center w-100 align-items-center"
+        class="row d-inline-flex justify-content-center w-100 align-items-center ps-3"
       >
         <div
           class="col-md-3 d-flex justify-content-between align-items-center border rounded-3 shadow"
@@ -74,9 +74,9 @@
             disabled
           >
             <img src="img/btnDora.png" alt="dora icon" width="40" />
-            Quay Đê
+            Quay thôi
           </button>
-          <img src="img/dora1.png" alt="dora icon" width="100" />
+          <img src="img/dora1.png" alt="dora icon" width="80" />
           <button
             id="spin_reset"
             class="btn btn-outline-warning rounded-3 px-2 fw-bold hide"
@@ -87,7 +87,7 @@
           </button>
         </div>
         <div
-          class="col-md-9 d-flex justify-content-center align-items-center border rounded-3 shadow the_wheel"
+          class="col-md-9 d-flex justify-content-center align-items-center rounded-3 shadow"
           style="
             background-image: url(img/wheel_back.png);
             background-position: center;
@@ -95,7 +95,7 @@
             height: 550px;
           "
         >
-          <canvas id="canvas" width="440" height="440"></canvas>
+          <canvas id="canvas" width="420" height="425"></canvas>
         </div>
       </div>
       <div
@@ -114,7 +114,7 @@
             onclick="openInsertModel()"
           >
             <img src="img/btnDora.png" alt="dora icon" width="40" />
-            Nay không vui, Muốn mấy món khác
+            Muốn mấy món khác
           </button>
         </div>
         <img
@@ -234,7 +234,9 @@
             <!-- show error -->
             <div class="alert alert-danger" id="errorAlert" role="alert">
               <h3 class="alert-heading">Lỗi rồi</h3>
-              <div class="d-inline-flex justify-content-center align-items-center">
+              <div
+                class="d-inline-flex justify-content-center align-items-center"
+              >
                 <h5 class="mb-0" id="errorTitle"></h5>
                 <img
                   src="img/tatMeme.png"
